@@ -1,5 +1,6 @@
+import { nanoid } from '@reduxjs/toolkit'
 import { Post } from 'interfaces/blog-interface'
-import { addPost, cancelEditingPost, finishEditingPost } from 'pages/blog/blog.reducer'
+import { addPost, cancelEditingPost, finishEditingPost } from 'pages/blog/blog-slice'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'store'
@@ -27,8 +28,7 @@ export default function CreatePost() {
     if (editingPost) {
       dispatch(finishEditingPost(formData))
     } else {
-      const formDataPlusId = { ...formData, id: new Date().toISOString() }
-      dispatch(addPost(formDataPlusId))
+      dispatch(addPost(formData))
     }
 
     setFormData(initialState)
